@@ -30,8 +30,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // animator.SetBool("isShooting", false);
+        // animator.SetBool("isShooting", false); 
         dirX = Input.GetAxisRaw("Horizontal") * moveSpeed;
         // print(dirX);
+        if(rigidBody.velocity.x == 0 && rigidBody.velocity.y == 0) {
+            animator.SetBool("isShooting", false);
+        }
 
         //Handle Jump
         if(Input.GetButtonDown("Jump") && rigidBody.velocity.y >= -ERROR && rigidBody.velocity.y <= ERROR) {
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour
         //Handle Run
         if(Mathf.Abs(dirX) > 0 && rigidBody.velocity.y >= -ERROR && rigidBody.velocity.y <= ERROR) {
             animator.SetBool("isRunning", true);
+            animator.SetBool("isShooting", false); 
         }
         else {
             animator.SetBool("isRunning", false);
@@ -52,12 +58,31 @@ public class PlayerController : MonoBehaviour
         }
 
         if(rigidBody.velocity.y > ERROR) {
-            animator.SetBool("isJumping", true);            
+            animator.SetBool("isJumping", true);  
+            animator.SetBool("isShooting", false);          
         }
 
         if(rigidBody.velocity.y < -ERROR) {
             animator.SetBool("isJumping", false);
             animator.SetBool("isFalling", true);
+            animator.SetBool("isShooting", false); 
+        }
+
+        if(Input.GetButtonDown("Fire1")) {
+            // animation["Shoot"].wrapMode = WrapMode.Once;
+            // animation.Play("Shoot");
+            animator.SetBool("isShooting", true);
+            // float timer = 0;
+            // bool timerReached = false;
+
+            // // if(!timerReached) {
+            // timer+= Time.deltaTime;
+            // // }
+            // Debug.Log("wakgengwak "+ timer.ToString());
+            // if(timer > 2) {
+            //     Debug.Log("wakgeng "+ timer.ToString());
+            //     animator.SetBool("isShooting", false);
+            // }
         }
     }
 
