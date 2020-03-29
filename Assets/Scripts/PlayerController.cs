@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        localScale = transform.localScale;
+        // localScale = transform.localScale;
         moveSpeed = 5f;
     }
 
@@ -63,22 +63,38 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate() {
         rigidBody.velocity = new Vector2(dirX, rigidBody.velocity.y);
-        Debug.Log(rigidBody.velocity.x);
-        Debug.Log(rigidBody.velocity.y);
+        // Debug.Log(rigidBody.velocity.x);
+        // Debug.Log(rigidBody.velocity.y);
     }
 
     private void LateUpdate() {
-        if(dirX > 0) {
-            facingRight = true;
+        // if(dirX > 0) {
+        //     facingRight = true;
+        // }
+        // else if (dirX < 0) {
+        //     facingRight = false;
+        // }
+
+        
+        if(dirX * Time.fixedDeltaTime > 0 && !facingRight) {
+            Flip();
         }
-        else if (dirX < 0) {
-            facingRight = false;
+        else if (dirX * Time.fixedDeltaTime < 0 && facingRight) {
+            Flip();
         }
 
-        if((facingRight && localScale.x < 0) || (!facingRight && localScale.x > 0) ) {
-            localScale.x *= -1;
-        }
+        // Flip();
+        // if((facingRight && localScale.x < 0) || (!facingRight && localScale.x > 0) ) {
+        //     // localScale.x *= -1;
+        //     transform.Rotate(0f,180f,0f);
+        // }
 
-        transform.localScale = localScale;
+        // transform.localScale = localScale;
+    }
+
+    private void Flip() {
+        facingRight = !facingRight;
+
+        transform.Rotate(0f,180f,0f);
     }
 }
