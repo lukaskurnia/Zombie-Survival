@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         //Handle Jump
         if(Input.GetButtonDown("Jump") && rigidBody.velocity.y >= -ERROR && rigidBody.velocity.y <= ERROR) {
-            rigidBody.AddForce(Vector2.up * 500f);
+            rigidBody.AddForce(Vector2.up * 700f);
         }
 
         //Handle Run
