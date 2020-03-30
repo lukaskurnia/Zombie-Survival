@@ -15,16 +15,23 @@ public class PlayerController : MonoBehaviour
     //For flip character
     private bool facingRight = true;
     private Vector3 localScale;
-
     private const float ERROR = 0.001f;
+
+    //Health
+    public float currentHealth;
+    public HealthBar healthBar;
+    const float enemyDamage = 0.5f;
+
 
     // Start is called before the first frame update
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        // localScale = transform.localScale;
         moveSpeed = 5f;
+
+        currentHealth = 100f;
+        healthBar.SetMaxHealth();
     }
 
     // Update is called once per frame
@@ -68,7 +75,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Fire1")) {
             animator.SetBool("isShooting", true);
-  
+            // TakeDamage(enemyDamage);
+        }
+
+        if(currentHealth <= 0) {
+            Die();
         }
     }
 
@@ -92,4 +103,26 @@ public class PlayerController : MonoBehaviour
 
         transform.Rotate(0f,180f,0f);
     }
+
+    private void TakeDamage(float damage) {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    private void OnTriggerStay2D(Collider2D info) {
+        Debug.Log(info);  
+        Enemy enemy = info.GetComponent<Enemy>();
+        if(enemy != null) //hit an enemy
+            TakeDamage(enemyDamage);
+    }
+
+    private void Die() {
+        animator.SetBool("isDead", true);
+        animator.SetBool("isShooting", false);
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isFalling", false);
+    }
+
+    
 }
