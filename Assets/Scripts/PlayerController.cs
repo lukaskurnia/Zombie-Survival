@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     const float enemyDamage = 0.5f;
 
+    private AudioSource gunShot;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
         currentHealth = 100f;
         healthBar.SetMaxHealth();
+
+        gunShot = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -75,11 +79,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Fire1")) {
             animator.SetBool("isShooting", true);
-            // TakeDamage(enemyDamage);
+            gunShot.Play();
         }
 
         if(currentHealth <= 0) {
-            Die();
+            Die();            
         }
     }
 
@@ -110,7 +114,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D info) {
-        Debug.Log(info);  
+        // Debug.Log(info);  
         Enemy enemy = info.GetComponent<Enemy>();
         if(enemy != null) //hit an enemy
             TakeDamage(enemyDamage);
@@ -121,7 +125,16 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isShooting", false);
         animator.SetBool("isRunning", false);
         animator.SetBool("isJumping", false);
-        animator.SetBool("isFalling", false);
+        animator.SetBool("isFalling", false);          
+        StartCoroutine(DestroyPlayer());        
+    }
+
+    IEnumerator DestroyPlayer() {
+        yield return new WaitForSeconds(3f);
+        // FindObjectOfType<AudioManager>().muteAll();
+        FindObjectOfType<AudioManager>().StopPlaying("BGM");
+        FindObjectOfType<AudioManager>().Play("GameOver");
+        Destroy(gameObject);
     }
 
     

@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D info) {
-        Debug.Log(info);  
+        // Debug.Log(info);  
         PlayerController player = info.GetComponent<PlayerController>();
         if(player != null){ //hit an enemy
             animator.SetBool("isAttack", true);
