@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health = 100;
+    const int scoreValue = 100;
 
     public GameObject EnemyDeath;
     public void TakeDamage(int damage) {
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
 
     void Die() {
         Instantiate(EnemyDeath, transform.position, Quaternion.identity);
+        Score.score += scoreValue;
         Destroy(gameObject);
     }
 
