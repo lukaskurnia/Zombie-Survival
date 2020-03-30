@@ -12,7 +12,7 @@ public class DeathZombie : MonoBehaviour
     }
 
     IEnumerator DestroyZombie() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 

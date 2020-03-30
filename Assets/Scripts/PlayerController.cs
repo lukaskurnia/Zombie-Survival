@@ -30,8 +30,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // animator.SetBool("isShooting", false);
-        // animator.SetBool("isShooting", false); 
         dirX = Input.GetAxisRaw("Horizontal") * moveSpeed;
         // print(dirX);
         if(rigidBody.velocity.x == 0 && rigidBody.velocity.y == 0) {
@@ -69,36 +67,16 @@ public class PlayerController : MonoBehaviour
         }
 
         if(Input.GetButtonDown("Fire1")) {
-            // animation["Shoot"].wrapMode = WrapMode.Once;
-            // animation.Play("Shoot");
             animator.SetBool("isShooting", true);
-            // float timer = 0;
-            // bool timerReached = false;
-
-            // // if(!timerReached) {
-            // timer+= Time.deltaTime;
-            // // }
-            // Debug.Log("wakgengwak "+ timer.ToString());
-            // if(timer > 2) {
-            //     Debug.Log("wakgeng "+ timer.ToString());
-            //     animator.SetBool("isShooting", false);
-            // }
+  
         }
     }
 
     private void FixedUpdate() {
         rigidBody.velocity = new Vector2(dirX, rigidBody.velocity.y);
-        // Debug.Log(rigidBody.velocity.x);
-        // Debug.Log(rigidBody.velocity.y);
     }
 
     private void LateUpdate() {
-        // if(dirX > 0) {
-        //     facingRight = true;
-        // }
-        // else if (dirX < 0) {
-        //     facingRight = false;
-        // }
 
         
         if(dirX * Time.fixedDeltaTime > 0 && !facingRight) {
@@ -107,14 +85,6 @@ public class PlayerController : MonoBehaviour
         else if (dirX * Time.fixedDeltaTime < 0 && facingRight) {
             Flip();
         }
-
-        // Flip();
-        // if((facingRight && localScale.x < 0) || (!facingRight && localScale.x > 0) ) {
-        //     // localScale.x *= -1;
-        //     transform.Rotate(0f,180f,0f);
-        // }
-
-        // transform.localScale = localScale;
     }
 
     private void Flip() {
