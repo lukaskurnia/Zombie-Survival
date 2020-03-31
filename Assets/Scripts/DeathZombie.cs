@@ -7,7 +7,6 @@ public class DeathZombie : MonoBehaviour
     
     void Start()
     {
-        // Destroy(gameObject);
         StartCoroutine(DestroyZombie());
     }
 

@@ -24,10 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource gunShot;
 
-    public GameObject gameOverUI;
 
-
-    // Start is called before the first frame update
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -40,11 +37,10 @@ public class PlayerController : MonoBehaviour
         gunShot = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         dirX = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        // print(dirX);
+
         if(rigidBody.velocity.x == 0 && rigidBody.velocity.y == 0) {
             animator.SetBool("isShooting", false);
         }
@@ -137,8 +133,8 @@ public class PlayerController : MonoBehaviour
         // FindObjectOfType<AudioManager>().muteAll();
         FindObjectOfType<AudioManager>().StopPlaying("BGM");
         FindObjectOfType<AudioManager>().Play("GameOver");  
-        GameOver.isGameOver = true;      
-        Debug.Log(GameOver.isGameOver);
+        HandlerGame.isGameOver = true;      
+        Debug.Log(HandlerGame.isGameOver);
         Destroy(gameObject);
     }
 

@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
 {
 
     public void PlayGame() {
+        HandlerGame.isGameOver = false;
+        Time.timeScale = 1f;   
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 

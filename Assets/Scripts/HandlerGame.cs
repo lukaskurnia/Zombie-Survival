@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameOver : MonoBehaviour
+public class HandlerGame : MonoBehaviour
 {
 
     public static bool isGameOver = false;
@@ -12,10 +13,12 @@ public class GameOver : MonoBehaviour
         
         gameOverUI.SetActive(false);
     }
-    // Update is called once per frame
     void Update()
     {
-        // Debug.Log("menu: " + PlayerController.isCharacterDie);   
+        if(Input.GetKeyDown(KeyCode.M) && !isGameOver){
+            SceneManager.LoadScene("Scenes/Menu");
+        }
+
         if(isGameOver) {
             Over();
         }

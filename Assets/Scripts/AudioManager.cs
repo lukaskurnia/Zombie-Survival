@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    // Start is called before the first frame update
     void Awake()
     {
         if(instance == null) {
@@ -31,28 +30,11 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
 
             s.source.mute = s.mute;
-
-            // if(isMute == 1){
-            //     s.source.mute = true;                
-            // }
-            // else {
-            // }
         }
     }
 
     void Update() {
         ToggleMute();
-        // foreach (Sound s in sounds) {
-        // int isMute = PlayerPrefs.GetInt("MutePrefs");
-        // // Debug.Log("Wak1");
-        // s.source = gameObject.GetComponent<AudioSource>();
-        //     if(isMute == 1){
-        //         s.source.mute = true;                
-        //     }
-        //     else {
-        //         s.source.mute = s.mute;
-        //     }
-        // }
     }
 
     void Start() {
@@ -86,24 +68,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
-        // s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
-
         s.source.Stop ();
     }
-
-    // public void muteAll() {
-    //     foreach (Sound s in sounds) {
-    //         s.source = gameObject.GetComponent<AudioSource>();
-    //         s.source.mute = true;
-    //     }
-    // }
-
-    //  public void unMuteAll() {
-    //     foreach (Sound s in sounds) {
-    //         s.source = gameObject.GetComponent<AudioSource>();
-    //         s.source.mute = false;
-    //     }
-    // }
 
 }

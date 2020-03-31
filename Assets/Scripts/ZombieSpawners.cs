@@ -7,11 +7,10 @@ public class ZombieSpawners : MonoBehaviour
     public GameObject enemy;
     float randomX, randomY;
     Vector2 spawnPoint;
-    public float spawnRate = 5f;
+    public float spawnRate = 2f;
     float nextSpawn = 0f;
-    const int MAX_ENEMY = 20;
+    const int MAX_ENEMY = 30;
 
-    // Update is called once per frame
     void Update()
     {
         if(Time.time > nextSpawn && Enemy.numOfEnemies < MAX_ENEMY) {
