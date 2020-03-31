@@ -6,8 +6,6 @@ public class EndScore : MonoBehaviour
 {
     public TextMeshProUGUI endScoreText;
 
-    // Update is called once per frame
-
     void Awake() {
         endScoreText = GetComponent<TextMeshProUGUI>();
     }
