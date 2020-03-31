@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource gunShot;
 
+    public GameObject gameOverUI;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -80,6 +82,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Fire1")) {
             animator.SetBool("isShooting", true);
             gunShot.Play();
+
         }
 
         if(currentHealth <= 0) {
@@ -133,7 +136,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         // FindObjectOfType<AudioManager>().muteAll();
         FindObjectOfType<AudioManager>().StopPlaying("BGM");
-        FindObjectOfType<AudioManager>().Play("GameOver");
+        FindObjectOfType<AudioManager>().Play("GameOver");  
+        GameOver.isGameOver = true;      
+        Debug.Log(GameOver.isGameOver);
         Destroy(gameObject);
     }
 
